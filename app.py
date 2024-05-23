@@ -16,13 +16,15 @@ def predict():
         subprocess.run([sys.executable,'-m','pip','install','pandas', 'numpy', 'scikit-learn','--quiet'])
         print('installation successfull')
     except:
-        print('Installation failed')
+        with open('logfile.txt','a') as file:
+            print('Installation failed',file=file)
     # subprocess.run([sys.executable,'-m','pip','install','scikit-learn','--quiet'])
     try:
         import pandas as pd
         import sklearn
     except:
-        print('importing failed')
+        with open('logfile.txt','a') as file:
+            print('importing failed',file=file)
     with open('model.pkl','rb') as file:
         model = pickle.load(file)
     
