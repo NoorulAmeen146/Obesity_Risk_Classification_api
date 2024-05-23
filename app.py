@@ -1,8 +1,13 @@
 from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
+import importlib
+import subprocess
+import sys
 
 app = Flask(__name__)
+
+subprocess.run([sys.executable,'-m','pip','install','scikit-learn','--quiet'])
 
 @app.route('/')
 def index():
