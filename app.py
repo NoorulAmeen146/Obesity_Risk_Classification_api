@@ -12,10 +12,17 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    subprocess.run([sys.executable,'-m','pip','install','pandas', 'numpy', 'scikit-learn','--quiet'])
+    try:
+        subprocess.run([sys.executable,'-m','pip','install','pandas', 'numpy', 'scikit-learn','--quiet'])
+        print('installation successfull')
+    except:
+        print('Installation failed')
     # subprocess.run([sys.executable,'-m','pip','install','scikit-learn','--quiet'])
-    import pandas as pd
-    import sklearn
+    try:
+        import pandas as pd
+        import sklearn
+    except:
+        print('importing failed')
     with open('model.pkl','rb') as file:
         model = pickle.load(file)
     
