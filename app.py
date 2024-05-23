@@ -12,7 +12,7 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
 
-    with open('./source/model.pkl','rb') as file:
+    with open('model.pkl','rb') as file:
         model = pickle.load(file)
     
     data = request.get_json(force=True)
