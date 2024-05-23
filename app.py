@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pickle
 import subprocess
+import importlib
 import sys
 
 app = Flask(__name__)
@@ -12,16 +13,34 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # try:
+    #     subprocess.run([sys.executable,'-m','pip','install','pandas', 'numpy', 'scikit-learn','--quiet'])
+    #     print('installation successfull')
+    # except:
+    #     return "installation failed"
+    # try:
+    #     import pandas as pd
+    #     import sklearn
+    # except:
+    #     return "import failed"
+
     try:
-        subprocess.run([sys.executable,'-m','pip','install','pandas', 'numpy', 'scikit-learn','--quiet'])
-        print('installation successfull')
-    except:
-        return "installation failed"
+        # Installing the packages
+        subprocess.run([sys.executable, '-m', 'pip', 'install', 'pandas', 'numpy', 'scikit-learn', '--quiet', '--no-warn-script-location'])
+    except Exception as e:
+        return f"Installation failed: {e}"
+    
     try:
-        import pandas as pd
-        import sklearn
-    except:
-        return "import failed"
+        # Dynamically import the packages
+        pandas = importlib.import_module('pandas')
+        sklearn = importlib.import_module('sklearn')
+        print('Import successful')
+        return pandas, sklearn
+    except ModuleNotFoundError as e:
+        return f"Import failed: {e}"
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
+
     with open('model.pkl','rb') as file:
         model = pickle.load(file)
     
