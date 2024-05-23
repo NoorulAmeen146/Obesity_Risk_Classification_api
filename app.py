@@ -7,8 +7,6 @@ import sys
 
 app = Flask(__name__)
 
-subprocess.run([sys.executable,'-m','pip','install','scikit-learn','--quiet'])
-
 @app.route('/')
 def index():
     # return '<h1> Hello World, I\'m back! </h1>'
@@ -16,7 +14,7 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-
+    subprocess.run([sys.executable,'-m','pip','install','scikit-learn','--quiet'])
     with open('model.pkl','rb') as file:
         model = pickle.load(file)
     
