@@ -22,7 +22,7 @@ def predict():
     df = pd.DataFrame([data['feature']],columns=column_names)
     prediction = model.predict(df)
     target_col_map = {
-        0:'Insufficient_Weight',
+        0:'Under_Weight',
         1:'Normal_Weight',
         2:'Overweight_Level_I',
         3:'Overweight_Level_II',
