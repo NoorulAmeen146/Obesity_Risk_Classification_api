@@ -33,11 +33,8 @@ with scol2:
     submit =  st.button(label='Submit',type='primary')
 
 if submit:
-    print('came here 1')
     if height_metric == 'Feet & Inches (ft & in)':
-        print('came here 2')
         if "'" not in height:
-            print('came here 3')
             st.write('Please enter your height in feet\'inches format. Ex: 5\'8, 4\'9 etc.')
         else:
             feet_to_meter = 0.3048
@@ -53,19 +50,18 @@ if submit:
     fcvc = 1 if fcvc=='Less' else 2 if fcvc=='Moderate' else 3
     caec = 0 if caec=='Less' else 1 if caec=='Moderate' else 2 if caec == 'High' else 3
     smoke = 1 if smoke == 'Yes' else 0
-    
     scc = 1 if scc=='Yes' else 0
+
     if gender.lower() == 'female':
         gender_female = 1
         gender_male = 0
     else:
         gender_female = 0
         gender_male = 1
+
     family_history = 0 if family_history == "Yes" else 1
     faf = 0 if faf == "Less" else 1 if faf=="Moderate" else 2
     calc = 0 if calc == "Yes" else 1
-
-    # st.write('Details submitted successfully!')
 
     data = {'feature':[age,height,weight,family_history,
                        favc,fcvc,ncp,caec,smoke,ch20,
